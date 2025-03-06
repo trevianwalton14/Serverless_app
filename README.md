@@ -19,6 +19,8 @@ In this stage I added a Lambda function to use SES to send emails and an executi
 I created an IAM Role which the email lambda reminder will use to interact with other AWS services. The IAM provides access to SES, SNS and Logging permissions to whatever assumes the role. 
 
 Next, I created a lambda function for the serverless application to create an email and then send it using SES.
+![Image](https://github.com/user-attachments/assets/6bbb401a-c423-4ed1-8bb0-26a8b74d2524)
+
 
 The code will import some libraries that will be used during its execution. It makes a connection to the SES service using the standard Boto3 client. The function then sends an email using data that’s passed to it by the state machine. When the lambda function is invoke by the state machine it’s given object and inside this object will be the destination email address to send to and a message. 
 
@@ -29,6 +31,8 @@ The state machine manages the flow of the application. The state machine waits a
 I created an IAM Role that the state machine will use to interact with other AWS services. The IAM provides access to SNS, Logging and invoke a Lambda function.
 
 I created a State Machine. The state machine starts and then waits for a certain amount of time based on the Timer State. Then the emails state invokes a lambda function. The next state finishes the execution.
+![Image](https://github.com/user-attachments/assets/13cc1295-4e34-4a93-91d6-00b5260fbad9)
+
 
 ## Stage 4: Implement the API Gateway, API and supporting lambda function
 
@@ -36,6 +40,7 @@ The API gateway is going to take in the data from the customer local machine bro
 
 The code accepts the data in and performs some checks, if it fails it provides a 400 response back to the client. If the lambda function got all the information it needed then it will execute the state machine. 
 
+![Image](https://github.com/user-attachments/assets/b363909d-485d-43f8-90d2-90829abb1116)
 I created the API Gateway. 
 
 ## Stage 5: Implement the static frontend application and test functionality
